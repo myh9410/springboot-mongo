@@ -1,4 +1,4 @@
-package com.spring.mongo.test.infrastructure.config;
+package com.spring.mongo.test.config;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Configuration;

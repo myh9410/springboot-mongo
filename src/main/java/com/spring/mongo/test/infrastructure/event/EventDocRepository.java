@@ -1,6 +1,6 @@
-package com.spring.mongo.test.domain.repository;
+package com.spring.mongo.test.infrastructure.event;
 
-import com.spring.mongo.test.domain.entity.EventDoc;
+import com.spring.mongo.test.domain.event.EventDoc;
 import org.springframework.data.mongodb.repository.MongoRepository;
 
 import java.util.List;

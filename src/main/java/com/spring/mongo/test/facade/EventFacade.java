@@ -1,9 +1,8 @@
 package com.spring.mongo.test.facade;
 
-import com.spring.mongo.test.domain.entity.EventDoc;
-import com.spring.mongo.test.domain.repository.EventDocRepository;
+import com.spring.mongo.test.domain.event.EventDoc;
+import com.spring.mongo.test.infrastructure.event.EventDocRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.crossstore.ChangeSetPersister;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;

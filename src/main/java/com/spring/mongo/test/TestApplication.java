@@ -1,6 +1,6 @@
 package com.spring.mongo.test;
 
-import com.spring.mongo.test.infrastructure.config.MongoDBProperties;
+import com.spring.mongo.test.config.MongoDBProperties;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;

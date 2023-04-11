@@ -1,4 +1,4 @@
-package com.spring.mongo.test.infrastructure.config;
+package com.spring.mongo.test.config;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
