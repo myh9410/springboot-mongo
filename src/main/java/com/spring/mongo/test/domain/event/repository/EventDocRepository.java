@@ -6,7 +6,7 @@ import org.springframework.data.mongodb.repository.ReactiveMongoRepository;
 
 import java.util.List;
 
-public interface EventDocRepository extends ReactiveMongoRepository<EventDoc, String> {
+public interface EventDocRepository extends MongoRepository<EventDoc, String> {
 
     List<EventDoc> findByTitle(String title);
 
