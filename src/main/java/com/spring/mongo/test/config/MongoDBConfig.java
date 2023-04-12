@@ -1,46 +1,37 @@
 package com.spring.mongo.test.config;
 
-
-import com.mongodb.reactivestreams.client.MongoClient;
-import com.mongodb.reactivestreams.client.MongoClients;
+import com.mongodb.client.MongoClient;
+import com.mongodb.client.MongoClients;
+import com.spring.mongo.test.domain.event.repository.EventDocRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.data.mongodb.MongoDatabaseFactory;
-import org.springframework.data.mongodb.config.AbstractReactiveMongoConfiguration;
 import org.springframework.data.mongodb.core.MongoTemplate;
-import org.springframework.data.mongodb.core.SimpleMongoClientDatabaseFactory;
-import org.springframework.data.mongodb.repository.config.EnableReactiveMongoRepositories;
+import org.springframework.data.mongodb.repository.config.EnableMongoRepositories;
 
 @RequiredArgsConstructor
-@EnableReactiveMongoRepositories
+@EnableMongoRepositories(basePackageClasses = EventDocRepository.class)
 @Configuration
-public class MongoDBConfig extends AbstractReactiveMongoConfiguration {
+public class MongoDBConfig {
 
     private final MongoDBProperties mongoDBProperties;
 
     @Bean
-    public MongoDatabaseFactory mongoDatabaseFactory() {
-        StringBuilder connectionString = new StringBuilder();
-        connectionString.append("mongodb://").append(mongoDBProperties.getHost())
-                .append(":").append(mongoDBProperties.getPort())
-                .append("/").append(mongoDBProperties.getDatabase());
-
-        return new SimpleMongoClientDatabaseFactory(connectionString.toString());
-    }
-
-    @Bean
     public MongoTemplate mongoTemplate() {
-        return new MongoTemplate(mongoTemplate().getMongoDatabaseFactory());
+        return new MongoTemplate(mongoClient(), mongoDBProperties.getDatabase());
     }
 
     @Bean
     public MongoClient mongoClient() {
-        return MongoClients.create();
-    }
+        StringBuilder connectionString = new StringBuilder();
+        connectionString.append("mongodb://")
+                .append(mongoDBProperties.getUsername()).append(":").append(mongoDBProperties.getPassword())
+                .append("@").append(mongoDBProperties.getHost())
+                .append(":").append(mongoDBProperties.getPort())
+                .append("/").append(mongoDBProperties.getDatabase());
 
-    @Override
-    protected String getDatabaseName() {
-        return mongoDBProperties.getDatabase();
+        System.out.println(connectionString.toString());
+
+        return MongoClients.create(connectionString.toString());
     }
 }

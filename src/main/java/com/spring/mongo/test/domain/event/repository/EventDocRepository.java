@@ -1,8 +1,7 @@
-package com.spring.mongo.test.infrastructure.event;
+package com.spring.mongo.test.domain.event.repository;
 
-import com.spring.mongo.test.domain.event.EventDoc;
+import com.spring.mongo.test.domain.event.entity.EventDoc;
 import org.springframework.data.mongodb.repository.MongoRepository;
-import org.springframework.data.mongodb.repository.ReactiveMongoRepository;
 
 import java.util.List;
 
