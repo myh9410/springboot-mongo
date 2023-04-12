@@ -1,4 +1,4 @@
-package com.spring.mongo.test.domain.event;
+package com.spring.mongo.test.domain.event.entity;
 
 import lombok.Builder;
 import lombok.Getter;

@@ -1,7 +1,7 @@
 package com.spring.mongo.test.facade;
 
-import com.spring.mongo.test.domain.event.EventDoc;
-import com.spring.mongo.test.infrastructure.event.EventDocRepository;
+import com.spring.mongo.test.domain.event.entity.EventDoc;
+import com.spring.mongo.test.domain.event.repository.EventDocRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
@@ -15,8 +15,8 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class EventFacade {
 
-    private MongoTemplate mongoTemplate;
-    private EventDocRepository eventDocRepository;
+    private final MongoTemplate mongoTemplate;
+    private final EventDocRepository eventDocRepository;
 
     public EventDoc getEvent(String id) {
         EventDoc eventDoc = mongoTemplate.findById(id, EventDoc.class);
