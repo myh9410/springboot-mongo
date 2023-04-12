@@ -6,3 +6,4 @@ spring:
       database: test
       username: root
       password: moon9494
+      authentication-database: admin

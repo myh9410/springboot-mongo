@@ -16,6 +16,7 @@ public class EventController {
 
     @GetMapping("/event/{id}")
     public void getEventById(@PathVariable(name = "id") String id) {
+        //id가 EventDoc entity의 id가 아니라 _id(ObjectId) 값임
         EventDoc eventDoc = eventFacade.getEvent(id);
 
         System.out.println(eventDoc.toString());

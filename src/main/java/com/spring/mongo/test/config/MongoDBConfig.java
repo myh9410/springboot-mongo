@@ -28,7 +28,9 @@ public class MongoDBConfig {
                 .append(mongoDBProperties.getUsername()).append(":").append(mongoDBProperties.getPassword())
                 .append("@").append(mongoDBProperties.getHost())
                 .append(":").append(mongoDBProperties.getPort())
-                .append("/").append(mongoDBProperties.getDatabase());
+                .append("/").append(mongoDBProperties.getDatabase())
+                .append("?authSource=admin")
+        ;
 
         System.out.println(connectionString.toString());
 
