@@ -1,8 +1,10 @@
 package com.spring.mongo.test.facade;
 
 import com.spring.mongo.test.domain.event.entity.EventDoc;
+import com.spring.mongo.test.domain.event.entity.dto.EventRequest;
 import com.spring.mongo.test.domain.event.repository.EventDocRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.dao.IncorrectResultSizeDataAccessException;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
@@ -18,16 +20,21 @@ public class EventFacade {
     private final MongoTemplate mongoTemplate;
     private final EventDocRepository eventDocRepository;
 
-    public EventDoc getEvent(String id) {
+    public EventDoc getEventById(String id) {
         EventDoc eventDoc = mongoTemplate.findById(id, EventDoc.class);
 
         return Optional.ofNullable(eventDoc).orElseThrow(IllegalArgumentException::new);
     }
 
-    public EventDoc getEventByRepo(String id) {
-        return eventDocRepository.findById(id).orElseThrow(IllegalAccessError::new);
-    }
+    public EventDoc getEventByTitle(String title) {
+        try {
+            EventDoc eventDoc = eventDocRepository.findByTitle(title);
 
+            return eventDoc;
+        } catch (IncorrectResultSizeDataAccessException irex) {
+            throw new IllegalArgumentException("aaaaa");
+        }
+    }
 
     public List<EventDoc> getEventList(String title) {
         Query query = new Query().addCriteria(Criteria.where("title").is(title));
@@ -35,16 +42,13 @@ public class EventFacade {
         return mongoTemplate.find(query, EventDoc.class);
     }
 
-    public List<EventDoc> getEventListByRepo(String title) {
-        return eventDocRepository.findByTitle(title);
-    }
+    public EventDoc insertEvent(EventRequest eventRequest) {
+        EventDoc eventDoc = EventDoc.builder()
+                .title(eventRequest.getTitle())
+                .image(eventRequest.getImage())
+                .build();
 
-    public EventDoc insertEvent(EventDoc event) {
-        return mongoTemplate.insert(event);
-    }
-
-    public EventDoc insertEventByRepo(EventDoc event) {
-        return eventDocRepository.insert(event);
+        return mongoTemplate.insert(eventDoc);
     }
 
 }
