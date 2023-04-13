@@ -1,6 +1,6 @@
 package com.spring.mongo.test;
 
-import com.spring.mongo.test.domain.event.entity.EventDoc;
+import com.spring.mongo.test.domain.event.entity.dto.EventRequest;
 import com.spring.mongo.test.facade.EventFacade;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,14 +15,12 @@ public class EventTest {
     @Test
     void insetEvent() {
 
-        EventDoc eventDoc =
-                EventDoc.builder()
-                    .id("id1")
-                    .title("title1")
-                    .image("image1")
-                    .build();
+        EventRequest eventRequest = EventRequest.builder()
+                .title("title999")
+                .image("image999")
+                .build();
 
-        eventFacade.insertEvent(eventDoc);
+        eventFacade.insertEvent(eventRequest);
     }
 
 }

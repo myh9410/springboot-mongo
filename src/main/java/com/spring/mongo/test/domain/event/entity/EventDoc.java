@@ -14,7 +14,7 @@ import javax.persistence.Id;
 public class EventDoc {
 
     @Id
-    private String id;
+    private String _id;
 
     private String title;
 

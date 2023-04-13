@@ -12,6 +12,6 @@ docker run --name mongodb -d -p 27017:27017 -e MONGO_INITDB_ROOT_USERNAME={usern
 mongosh -u {username} -p {userpwd}
 
 #몽고DB 내 명령어
-db.event.insertOne({id: "1", title: "title1", image: "image1"})
-db.event.find({id: "1"})
+db.event.insertOne({title: "title1", image: "image1"})
+db.event.find({title: "title1"})
 ```
