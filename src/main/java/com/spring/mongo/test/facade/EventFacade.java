@@ -1,5 +1,6 @@
 package com.spring.mongo.test.facade;
 
+import com.mongodb.client.result.DeleteResult;
 import com.spring.mongo.test.domain.event.entity.EventDoc;
 import com.spring.mongo.test.domain.event.entity.dto.EventRequest;
 import com.spring.mongo.test.domain.event.repository.EventDocRepository;
@@ -49,6 +50,15 @@ public class EventFacade {
                 .build();
 
         return mongoTemplate.insert(eventDoc);
+    }
+
+    public void deleteEvent(String title) {
+        Query query = new Query().addCriteria(Criteria.where("title").is(title));
+
+        DeleteResult deleteResult = mongoTemplate.remove(query, EventDoc.class);
+
+        System.out.println(query.toString());
+        System.out.println("deleted result : " + deleteResult.getDeletedCount());
     }
 
 }

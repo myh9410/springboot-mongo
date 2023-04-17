@@ -40,4 +40,9 @@ public class EventController {
     public void insertEvent(@RequestBody EventRequest eventRequest) {
         eventFacade.insertEvent(eventRequest);
     }
+
+    @DeleteMapping("/events/{title}")
+    public void deleteEventByTitle(@PathVariable(name = "title") String title) {
+        eventFacade.deleteEvent(title);
+    }
 }
